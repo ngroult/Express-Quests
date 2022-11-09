@@ -46,14 +46,12 @@ const getMovieById = (req, res) => {
 
 const postMovie = (req, res) => {
   const { title, director, year, color, duration } = req.body;
-  // console.log(req.body);
   database
     .query(
       "INSERT INTO movies (title, director, year, color, duration) VALUEs (?,?,?,?,?)",
       [title, director, year, color, duration]
     )
     .then(([result]) => {
-      // console.log(result.insertId);
       res.location(`/api/movies/${result.instertId}`).sendStatus(201);
     })
     .catch(() => {
